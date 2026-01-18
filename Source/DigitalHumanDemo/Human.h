@@ -8,6 +8,7 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class UInteractionComponent;
 
 UCLASS()
 class DIGITALHUMANDEMO_API AHuman : public ACharacter
@@ -29,6 +30,8 @@ protected:
 
 	void StartJump();
 	void StopJump();
+
+	void HandleInteract();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -45,4 +48,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	UCameraComponent* FollowCamera;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	UInteractionComponent* InteractionComponent;
 };

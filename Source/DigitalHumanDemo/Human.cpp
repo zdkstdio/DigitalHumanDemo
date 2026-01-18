@@ -3,6 +3,7 @@
 
 #include "Human.h"
 
+#include "InteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -28,6 +29,8 @@ AHuman::AHuman()
 
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("InteractionComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -85,6 +88,14 @@ void AHuman::StopJump()
 	StopJumping();
 }
 
+void AHuman::HandleInteract()
+{
+	if (InteractionComponent)
+	{
+		InteractionComponent->TryInteract();
+	}
+}
+
 // Called every frame
 void AHuman::Tick(float DeltaTime)
 {
@@ -104,5 +115,7 @@ void AHuman::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AHuman::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AHuman::StopJumping);
+
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AHuman::HandleInteract);
 }
 
