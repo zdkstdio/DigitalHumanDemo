@@ -20,4 +20,8 @@ class DIGITALHUMANDEMO_API IInteractable
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void Interact(AActor* InstigatorActor);
+
+	// 返回交互提示文本，不同的对象可以返回不同的提示
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	FText GetInteractionHintText() const;
 };

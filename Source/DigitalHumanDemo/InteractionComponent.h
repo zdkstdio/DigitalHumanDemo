@@ -25,6 +25,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void NotifyInteractionTargetChanged();
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	AActor* FocusedActor = nullptr;
 	
@@ -33,4 +35,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
 	void TryInteract();
+
+protected:
+	FText BuildInteractionHintText() const;
 };
